@@ -1,0 +1,60 @@
+services:
+  python-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: python-backend
+    restart: unless-stopped
+    init: true
+    # The backend FastAPI app listens on port 8000
+    ports:
+      - "8000:8000"
+    # Use the .env file in IntelliSpendAI for environment variables
+    env_file:
+      - ./IntelliSpendAI/.env
+    depends_on:
+      - postgres-db
+    networks:
+      - intellispend-net
+
+  js-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: js-frontend
+    restart: unless-stopped
+    init: true
+    # The static frontend is served on port 8080
+    ports:
+      - "8080:8080"
+    networks:
+      - intellispend-net
+
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: intellispends
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d intellispends"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - intellispend-net
+    # Note: You must manually enable the pgvector extension after first run
+
+networks:
+  intellispend-net:
+    driver: bridge
+
+volumes:
+  pgdata:
+    # Persistent storage for PostgreSQL data

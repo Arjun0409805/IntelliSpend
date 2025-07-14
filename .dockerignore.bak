@@ -1,0 +1,87 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+.venv/
+venv/
+IntelliSpendAI/__pycache__/
+IntelliSpendAI/app/__pycache__/
+IntelliSpendAI/app/api/__pycache__/
+
+# Node.js / JavaScript
+node_modules/
+npm-debug.log
+yarn-debug.log
+
+# Build outputs
+build/
+dist/
+out/
+
+# IDE/editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Version control
+.git/
+.gitignore
+.svn/
+.hg/
+
+# Environment and secrets
+.env*
+*.env
+*.pem
+*.key
+*.crt
+config.local.*
+*.local.yml
+
+# Documentation
+README*
+*.md
+docs/
+
+# Docker files
+Dockerfile*
+docker-compose*
+
+# Temporary files
+*.tmp
+tmp/
+temp/
+
+# Local development
+.local/
+local/
+
+# Test files and debug
+*.log
+test/
+tests/
+debug/
+
+# Project-specific: Exclude virtual environments in root and IntelliSpendAI
+/venv/
+/.venv/
+/IntelliSpendAI/venv/
+/IntelliSpendAI/.venv/
+
+# Exclude frontend build artifacts (if any)
+/frontend/node_modules/
+/frontend/dist/
+/frontend/build/
+
+# Exclude frontend editor and temp files
+/frontend/.idea/
+/frontend/.vscode/
+/frontend/*.log
+/frontend/*.tmp
+
+# Exclude any other hidden files not needed
+.*~
